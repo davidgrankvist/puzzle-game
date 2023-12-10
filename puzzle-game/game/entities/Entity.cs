@@ -22,6 +22,11 @@
 
 		public T? GetComponent<T>() where T : IComponent
 		{
+			return Components.OfType<T>().FirstOrDefault();
+
+		}
+		public T GetComponentUnsafe<T>() where T : IComponent
+		{
 			return Components.OfType<T>().First();
 		}
 	}

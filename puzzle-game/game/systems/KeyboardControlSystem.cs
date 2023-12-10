@@ -25,30 +25,31 @@
 		}
 
 		void UpdatePlayer(Entity player) {
-			var body = player.GetComponent<Body>();
+			var body = player.GetComponent<PhysicsBody>();
 
 			if (body == null)
 			{
 				return;
 			}
 
-			var speed = 5;
+			body.Vx = 0;
+			body.Vy = 0;
 
 			if (Rl.IsKeyDown(R.KeyboardKey.KEY_W))
 			{
-				body.Y -= speed;
+				body.Vy = -Constants.PLAYER_SPEED;
 			}
 			if (Rl.IsKeyDown(R.KeyboardKey.KEY_A))
 			{
-				body.X -= speed;
+				body.Vx = -Constants.PLAYER_SPEED;
 			}
 			if (Rl.IsKeyDown(R.KeyboardKey.KEY_S))
 			{
-				body.Y += speed;
+				body.Vy = Constants.PLAYER_SPEED;
 			}
 			if (Rl.IsKeyDown(R.KeyboardKey.KEY_D))
 			{
-				body.X += speed;
+				body.Vx = Constants.PLAYER_SPEED;
 			}
 		}
 	}

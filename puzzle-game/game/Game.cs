@@ -11,6 +11,7 @@
             {
                 new SpawnSystem(Entities),
                 new KeyboardControlSystem(Entities),
+                new PhysicsSystem(Entities),
                 new RenderSystem(Entities)
             };
 		}

@@ -12,7 +12,7 @@ namespace puzzle_game
 
 		public void Load()
 		{
-			Entities.Add(EntityCreator.CreateGround());
+			Entities.AddRange(EntityCreator.CreateLevelTiles());
 			Entities.Add(EntityCreator.CreatePlayer());
 		}
 

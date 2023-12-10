@@ -10,8 +10,9 @@
             Systems = new List<ISystem>
             {
                 new SpawnSystem(Entities),
-				new RenderSystem(Entities)
-			};
+                new KeyboardControlSystem(Entities),
+                new RenderSystem(Entities)
+            };
 		}
 
         public void Run()

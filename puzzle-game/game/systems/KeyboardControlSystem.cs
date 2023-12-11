@@ -32,20 +32,19 @@
 				return;
 			}
 
-			body.Vx = 0;
-			body.Vy = 0;
 
-			if (Rl.IsKeyDown(R.KeyboardKey.KEY_W))
+			// jump
+			// could be mid-air with Vy = 0, but that's hard to time with a jump keypress
+			if (body.Vy == 0 && Rl.IsKeyPressed(R.KeyboardKey.KEY_W))
 			{
-				body.Vy = -Constants.PLAYER_SPEED;
+				body.Vy = -Constants.PLAYER_SPEED * 3;
 			}
+
+			// move left/right
+			body.Vx = 0;
 			if (Rl.IsKeyDown(R.KeyboardKey.KEY_A))
 			{
 				body.Vx = -Constants.PLAYER_SPEED;
-			}
-			if (Rl.IsKeyDown(R.KeyboardKey.KEY_S))
-			{
-				body.Vy = Constants.PLAYER_SPEED;
 			}
 			if (Rl.IsKeyDown(R.KeyboardKey.KEY_D))
 			{

@@ -25,6 +25,7 @@
 				return;
 			}
 
+			ApplyGravity(physicsEntities);
 			CollisionDetectionService.CheckAndApplyCollisions(physicsEntities);
 			MoveEntities(physicsEntities);
 		}
@@ -35,6 +36,22 @@
 				&& entity.HasComponent<Body>();
 		}
 
+		void ApplyGravity(List<Entity> physicsEntities)
+		{
+			var entitiesWithGravity = physicsEntities.Where((entity) => entity.HasComponent<Gravity>()).ToList();
+
+			foreach (var entity in entitiesWithGravity)
+			{
+				var physicsBody = entity.GetComponentUnsafe<PhysicsBody>();
+				var gravity = entity.GetComponentUnsafe<Gravity>();
+
+				// accelerates way too fast, so cap it for now
+				if (physicsBody.Vy < Constants.PLAYER_SPEED * 2)
+				{
+					physicsBody.Vy += gravity.Ay;
+				}
+			}
+		}
 
 		void MoveEntities(List<Entity> physicsEntities)
 		{

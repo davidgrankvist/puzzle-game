@@ -80,7 +80,7 @@
 			const int height = 15;
 
 			player.AddComponent(new Body(x, y, new Rectangle(width, height)));
-			player.AddComponent(new KeyboardControl());
+			player.AddComponent(new ControlledMovement());
 			player.AddComponent(new PhysicsBody());
 			player.AddComponent(new Gravity());
 			player.AddComponent(new Render(R.Color.BLUE));

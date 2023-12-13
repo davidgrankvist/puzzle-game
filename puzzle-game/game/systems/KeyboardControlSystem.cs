@@ -15,23 +15,21 @@
 
 		public void Update()
 		{
-			var player = Entities.Find((entity) => entity.HasComponent<KeyboardControl>());
+			UpdatePlayer();
+			UpdateOrbits();
+		}
+
+		void UpdatePlayer() {
+			var player = Entities.Find((entity) => 
+				entity.HasComponent<ControlledMovement>()
+				&& entity.HasComponent<PhysicsBody>()
+			);
+
 			if (player == null)
 			{
 				return;
 			}
-
-			UpdatePlayer(player);
-		}
-
-		void UpdatePlayer(Entity player) {
-			var body = player.GetComponent<PhysicsBody>();
-
-			if (body == null)
-			{
-				return;
-			}
-
+			var body = player.GetComponentUnsafe<PhysicsBody>();
 
 			// jump
 			// could be mid-air with Vy = 0, but that's hard to time with a jump keypress
@@ -49,6 +47,35 @@
 			if (Rl.IsKeyDown(R.KeyboardKey.KEY_D))
 			{
 				body.Vx = Constants.PLAYER_SPEED;
+			}
+		}
+
+		void UpdateOrbits()
+		{
+			var entitiesToRotate = Entities
+				.Where((entity) => 
+					entity.HasComponent<Orbit>()
+				).ToList();
+
+			if (entitiesToRotate.Count == 0)
+			{
+				return;
+			}
+
+			var rotationSign = Orbit.Direction.Stationary;
+			if (Rl.IsKeyDown(R.KeyboardKey.KEY_LEFT))
+			{
+				rotationSign = Orbit.Direction.Left;
+			}
+			if (Rl.IsKeyDown(R.KeyboardKey.KEY_RIGHT))
+			{
+				rotationSign = Orbit.Direction.Right;
+			}
+
+			foreach (var tile in entitiesToRotate)
+			{
+				var orbit = tile.GetComponentUnsafe<Orbit>();
+				orbit.Sign = rotationSign;
 			}
 		}
 	}

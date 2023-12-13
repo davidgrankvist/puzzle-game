@@ -27,7 +27,7 @@
 
 			ApplyGravity(physicsEntities);
 			CollisionDetectionService.CheckAndApplyCollisions(physicsEntities);
-			MoveEntities(physicsEntities);
+			MovePlayer(physicsEntities);
 		}
 
 		bool IsPhysicsEntity(Entity entity)
@@ -53,9 +53,9 @@
 			}
 		}
 
-		void MoveEntities(List<Entity> physicsEntities)
+		void MovePlayer(List<Entity> physicsEntities)
 		{
-			var player = physicsEntities.Find((entity) => entity.HasComponent<KeyboardControl>());
+			var player = physicsEntities.Find((entity) => entity.HasComponent<ControlledMovement>());
 
 			if (player == null)
 			{
@@ -67,6 +67,27 @@
 
 			playerBody.X += playerPhysicsBody.Vx;
 			playerBody.Y += playerPhysicsBody.Vy;
+		}
+
+		void ApplyOrbits(List<Entity> physicsEntities)
+		{
+			var entitiesWithOrbit = physicsEntities.Where((entity) => entity.HasComponent<Orbit>());
+
+			foreach (var entity in entitiesWithOrbit)
+			{
+				// part 1 - move along orbit
+				// get current angle relative to center
+				// add angular velocity
+				// calculate the new position
+
+				// part 2 - rotate body so that it faces the origin
+				// probably need to know the corner positions
+				// if we rotate all of the corner positions in part 1, then that should solve part 2
+
+				// part 3 - collision detection
+				// part 3.1 - when doing the orbit, don't rotate through the player
+				// part 3.2 - when done rotating, player needs to check for rotated rectangles
+			}
 		}
 	}
 }

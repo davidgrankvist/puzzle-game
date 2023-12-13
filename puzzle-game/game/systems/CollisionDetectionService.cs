@@ -18,7 +18,7 @@ namespace puzzle_game
 
 		public void CheckAndApplyCollisions(List<Entity> physicsEntities)
 		{
-			var player = physicsEntities.Find((entity) => entity.HasComponent<KeyboardControl>());
+			var player = physicsEntities.Find((entity) => entity.HasComponent<ControlledMovement>());
 
 			if (player == null)
 			{

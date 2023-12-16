@@ -27,22 +27,16 @@ namespace puzzle_game
 
 			var playerPhysics = player.GetComponentUnsafe<PhysicsBody>();
 			var playerBody = player.GetComponentUnsafe<Body>();
-			if (playerBody.Shape is not Rectangle)
-			{
-				return;
-			}
-
-			var playerRect = (Rectangle)playerBody.Shape;
 
 			playerRlRectNextX.X = playerBody.X + playerPhysics.Vx;
 			playerRlRectNextX.Y = playerBody.Y;
-			playerRlRectNextX.Width = playerRect.Width;
-			playerRlRectNextX.Height = playerRect.Height;
+			playerRlRectNextX.Width = playerBody.Width;
+			playerRlRectNextX.Height = playerBody.Height;
 
 			playerRlRectNextY.X = playerBody.X;
 			playerRlRectNextY.Y = playerBody.Y + playerPhysics.Vy;
-			playerRlRectNextY.Width = playerRect.Width;
-			playerRlRectNextY.Height = playerRect.Height;
+			playerRlRectNextY.Width = playerBody.Width;
+			playerRlRectNextY.Height = playerBody.Height;
 
 			foreach (var entity in physicsEntities)
 			{
@@ -51,15 +45,11 @@ namespace puzzle_game
 					continue;
 				}
 				var entityBody = entity.GetComponentUnsafe<Body>();
-				if (entityBody.Shape is not Rectangle)
-				{
-					continue;
-				}
-				var entityRect = (Rectangle)entityBody.Shape;
+
 				entityRlRect.X = entityBody.X;
 				entityRlRect.Y = entityBody.Y;
-				entityRlRect.Width = entityRect.Width;
-				entityRlRect.Height = entityRect.Height;
+				entityRlRect.Width = entityBody.Width;
+				entityRlRect.Height = entityBody.Height;
 
 				bool willCollideX = Rl.CheckCollisionRecs(playerRlRectNextX, entityRlRect);
 				bool willCollideY = Rl.CheckCollisionRecs(playerRlRectNextY, entityRlRect);

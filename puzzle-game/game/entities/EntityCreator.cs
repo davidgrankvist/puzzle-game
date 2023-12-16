@@ -7,15 +7,15 @@
 			List<Entity> levelEntities = new List<Entity>();
 
 			var borderTop = new Entity();
-			borderTop.AddComponent(new Body(0, -1, new Rectangle(Constants.WINDOW_WIDTH, 1)));
+			borderTop.AddComponent(new Body(0, -1, Constants.WINDOW_WIDTH, 1));
 			borderTop.AddComponent(new PhysicsBody());
 
 			var borderLeft = new Entity();
-			borderLeft.AddComponent(new Body(-1, 0, new Rectangle(1, Constants.WINDOW_HEIGHT)));
+			borderLeft.AddComponent(new Body(-1, 0, 1, Constants.WINDOW_HEIGHT));
 			borderLeft.AddComponent(new PhysicsBody());
 
 			var borderRight = new Entity();
-			borderRight.AddComponent(new Body(Constants.WINDOW_WIDTH, 0, new Rectangle(1, Constants.WINDOW_HEIGHT)));
+			borderRight.AddComponent(new Body(Constants.WINDOW_WIDTH, 0, 1, Constants.WINDOW_HEIGHT));
 			borderRight.AddComponent(new PhysicsBody());
 
 			levelEntities.Add(borderTop);
@@ -34,7 +34,7 @@
 			const int height = 50;
 			const int y = Constants.WINDOW_HEIGHT - height;
 
-			ground.AddComponent(new Body(0, y, new Rectangle(Constants.WINDOW_WIDTH, height)));
+			ground.AddComponent(new Body(0, y, Constants.WINDOW_WIDTH, height));
 			ground.AddComponent(new PhysicsBody());
 			ground.AddComponent(new Render(R.Color.BLACK));
 
@@ -48,7 +48,7 @@
 			const int height = 50;
 			const int y = Constants.WINDOW_HEIGHT - 100;
 
-			ground.AddComponent(new Body(400, y, new Rectangle(width, height)));
+			ground.AddComponent(new Body(400, y, width, height));
 			ground.AddComponent(new PhysicsBody());
 			ground.AddComponent(new Render(R.Color.BLACK));
 
@@ -62,7 +62,7 @@
 			const int height = 50;
 			const int y = Constants.WINDOW_HEIGHT - 200;
 
-			ground.AddComponent(new Body(450, y, new Rectangle(width, height)));
+			ground.AddComponent(new Body(450, y, width, height));
 			ground.AddComponent(new PhysicsBody());
 			ground.AddComponent(new Render(R.Color.BLACK));
 
@@ -79,7 +79,7 @@
 			const int width = 10;
 			const int height = 15;
 
-			player.AddComponent(new Body(x, y, new Rectangle(width, height)));
+			player.AddComponent(new Body(x, y, width, height));
 			player.AddComponent(new ControlledMovement());
 			player.AddComponent(new PhysicsBody());
 			player.AddComponent(new Gravity());

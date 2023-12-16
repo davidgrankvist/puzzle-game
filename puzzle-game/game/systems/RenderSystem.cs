@@ -22,19 +22,14 @@
 
 		void renderEntity(Entity entity)
 		{
-			var render = entity.GetComponent<Render>();
-			var body = entity.GetComponent<Body>();
-
-			if (render == null || body == null)
+			if (!entity.HasComponent<Render>() || !entity.HasComponent<Body>())
 			{
 				return;
 			}
+			var render = entity.GetComponentUnsafe<Render>();
+			var body = entity.GetComponentUnsafe<Body>();
 
-			if (body.Shape is Rectangle)
-			{
-				var rect = (Rectangle)body.Shape;
-				Rl.DrawRectangle(body.X, body.Y, rect.Width, rect.Height, render.FillColor);
-			}
+			Rl.DrawRectangle(body.X, body.Y, body.Width, body.Height, render.FillColor);
 		}
 	}
 }

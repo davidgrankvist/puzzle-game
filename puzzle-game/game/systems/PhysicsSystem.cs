@@ -1,4 +1,7 @@
-﻿namespace puzzle_game
+﻿using System.Numerics;
+using System.Reflection.Metadata.Ecma335;
+
+namespace puzzle_game
 {
 	public class PhysicsSystem : ISystem
 	{
@@ -25,6 +28,7 @@
 				return;
 			}
 
+			ApplyOrbits(physicsEntities);
 			ApplyGravity(physicsEntities);
 			CollisionDetectionService.CheckAndApplyCollisions(physicsEntities);
 			MovePlayer(physicsEntities);
@@ -75,18 +79,26 @@
 
 			foreach (var entity in entitiesWithOrbit)
 			{
-				// part 1 - move along orbit
-				// get current angle relative to center
-				// add angular velocity
-				// calculate the new position
+				var body = entity.GetComponentUnsafe<Body>();
+				var orbit = entity.GetComponentUnsafe<Orbit>();
 
-				// part 2 - rotate body so that it faces the origin
-				// probably need to know the corner positions
-				// if we rotate all of the corner positions in part 1, then that should solve part 2
+				if (orbit.Sign == 0)
+				{
+					continue;
+				}
 
-				// part 3 - collision detection
-				// part 3.1 - when doing the orbit, don't rotate through the player
-				// part 3.2 - when done rotating, player needs to check for rotated rectangles
+				var center = new Vector2(orbit.CenterX, orbit.CenterY);
+				var position = new Vector2(body.X, body.Y);
+
+				// translate, rotate, translate back
+				var tpos = new Vector2(position.X - center.X, position.Y - center.Y);
+				var angleDelta = (float)(orbit.Sign) * orbit.AngularVelocity;
+				var vrot = Rm.Vector2Rotate(tpos, angleDelta);
+				vrot.X += center.X;
+				vrot.Y += center.Y;
+
+				body.X = vrot.X;
+				body.Y = vrot.Y;
 			}
 		}
 	}

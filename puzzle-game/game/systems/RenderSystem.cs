@@ -29,7 +29,7 @@
 			var render = entity.GetComponentUnsafe<Render>();
 			var body = entity.GetComponentUnsafe<Body>();
 
-			Rl.DrawRectangle(body.X, body.Y, body.Width, body.Height, render.FillColor);
+			Rl.DrawRectangle((int)body.X, (int)body.Y, body.Width, body.Height, render.FillColor);
 		}
 	}
 }

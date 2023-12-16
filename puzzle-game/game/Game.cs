@@ -28,7 +28,7 @@
         void GameLoop()
         {
             Rl.InitWindow(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT, Constants.WINDOW_TITLE);
-            Rl.SetTargetFPS(60);
+            Rl.SetTargetFPS(Constants.TARGET_FPS);
 
             while(!Rl.WindowShouldClose())
             {

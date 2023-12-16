@@ -4,13 +4,15 @@ namespace puzzle_game
 {
 	public class Orbit : IComponent
 	{
-		public Vector2 Center { get; set; }
+        public float CenterX { get; set; }
+        public float CenterY { get; set; }
         public float AngularVelocity { get; set; }
         public Direction Sign { get; set; }
 
-        public Orbit(Vector2 origin, float angularVelocity, Direction sign)
+        public Orbit(float centerX, float centerY, float angularVelocity, Direction sign)
         {
-            Center = origin;
+            CenterX = centerX;
+            CenterY = centerY;
             AngularVelocity = angularVelocity;
             Sign = sign;
         }

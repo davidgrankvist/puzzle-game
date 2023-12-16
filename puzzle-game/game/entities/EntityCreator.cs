@@ -51,6 +51,7 @@
 			ground.AddComponent(new Body(400, y, width, height));
 			ground.AddComponent(new PhysicsBody());
 			ground.AddComponent(new Render(R.Color.BLACK));
+			ground.AddComponent(new Orbit(Constants.CENTER_X, Constants.CENTER_Y, Constants.ORBIT_SPEED, Orbit.Direction.Stationary));
 
 			return ground;
 		}
@@ -65,6 +66,7 @@
 			ground.AddComponent(new Body(450, y, width, height));
 			ground.AddComponent(new PhysicsBody());
 			ground.AddComponent(new Render(R.Color.BLACK));
+			ground.AddComponent(new Orbit(Constants.CENTER_X, Constants.CENTER_Y, Constants.ORBIT_SPEED, Orbit.Direction.Stationary));
 
 			return ground;
 		}

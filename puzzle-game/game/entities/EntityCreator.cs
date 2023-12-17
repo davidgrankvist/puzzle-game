@@ -61,9 +61,10 @@
 
 			const int width = 80;
 			const int height = 50;
+			const int x = 450;
 			const int y = Constants.WINDOW_HEIGHT - 200;
 
-			ground.AddComponent(new Body(450, y, width, height));
+			ground.AddComponent(new Body(x, y, width, height));
 			ground.AddComponent(new PhysicsBody());
 			ground.AddComponent(new Render(R.Color.BLACK));
 			ground.AddComponent(new Orbit(Constants.CENTER_X, Constants.CENTER_Y, Constants.ORBIT_SPEED, Orbit.Direction.Stationary));

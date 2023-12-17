@@ -88,17 +88,32 @@ namespace puzzle_game
 				}
 
 				var center = new Vector2(orbit.CenterX, orbit.CenterY);
-				var position = new Vector2(body.X, body.Y);
+				var topLeft = new Vector2(body.X, body.Y);
+				var orbitAngleDelta = (float)(orbit.Sign) * orbit.AngularVelocity;
 
-				// translate, rotate, translate back
-				var tpos = new Vector2(position.X - center.X, position.Y - center.Y);
-				var angleDelta = (float)(orbit.Sign) * orbit.AngularVelocity;
-				var vrot = Rm.Vector2Rotate(tpos, angleDelta);
-				vrot.X += center.X;
-				vrot.Y += center.Y;
+				// calculate next top left
+				// translate to check orbit around origin, rotate, translate back
+				var topLeftTranslated = new Vector2(topLeft.X - center.X, topLeft.Y - center.Y);
+				var topLeftTranslatedRotated = Rm.Vector2Rotate(topLeftTranslated, orbitAngleDelta);
+				var topLeftXNext = topLeftTranslatedRotated.X + center.X;
+				var topLeftYNext = topLeftTranslatedRotated.Y + center.Y;
 
-				body.X = vrot.X;
-				body.Y = vrot.Y;
+				// also calculate top right in order to determine how the rectangle is rotated
+				var topRight = new Vector2(
+					topLeft.X + body.Width * MathF.Cos(body.Angle),
+					topLeft.Y + body.Width * MathF.Sin(body.Angle)
+				);
+				var topRightTranslated = new Vector2(topRight.X - center.X, topRight.Y - center.Y);
+				var topRightTranslatedRotated = Rm.Vector2Rotate(topRightTranslated, orbitAngleDelta);
+				var topRightXNext = topRightTranslatedRotated.X + center.X;
+				var topRightYNext = topRightTranslatedRotated.Y + center.Y;
+				// translate top left of rectangle to origin to determine the angle
+				var angleNext = MathF.Acos((topRightXNext - topLeftXNext) / body.Width);
+
+				// update body
+				body.X = topLeftXNext;
+				body.Y = topLeftYNext;
+				body.Angle = angleNext;
 			}
 		}
 	}

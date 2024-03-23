@@ -1,4 +1,6 @@
-﻿namespace puzzle_game
+﻿using System.Numerics;
+
+namespace puzzle_game
 {
 	public class EntityCreator
 	{
@@ -86,6 +88,20 @@
 			player.AddComponent(new Render(R.Color.BLUE));
 
 			return player;
+		}
+
+		public static Entity CreateCamera()
+		{
+			var camera = new Entity();
+			var cameraComponent = new Camera(
+				target: new Vector2(Constants.CAMERA_TARGET_X, Constants.CAMERA_TARGET_Y),
+				offset: new Vector2(Constants.CAMERA_TARGET_X, Constants.CAMERA_TARGET_Y),
+				rotation: 0,
+				zoom: 1f
+			);
+			camera.AddComponent(cameraComponent);
+
+			return camera;
 		}
 	}
 }

@@ -14,6 +14,7 @@ namespace puzzle_game
 		{
 			Entities.AddRange(EntityCreator.CreateLevelTiles());
 			Entities.Add(EntityCreator.CreatePlayer());
+			Entities.Add(EntityCreator.CreateCamera());
 		}
 
 		public void Update()

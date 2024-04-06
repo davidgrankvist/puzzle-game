@@ -2,7 +2,7 @@
 using puzzle_game.Game.Components;
 using puzzle_game.Game.Entities;
 using puzzle_game.Game.Systems;
-using System.Numerics;
+using Raylib_cs;
 
 namespace puzzle_game.Game
 {
@@ -10,7 +10,7 @@ namespace puzzle_game.Game
 	{
 		List<Entity> Entities;
 		List<ISystem> Systems;
-		Camera Camera;
+		Camera? Camera;
 
 
 		public Game()
@@ -48,25 +48,25 @@ namespace puzzle_game.Game
 
 		void GameLoop()
 		{
-			Rl.InitWindow(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT, Constants.WINDOW_TITLE);
-			Rl.SetTargetFPS(60);
+			Raylib.InitWindow(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT, Constants.WINDOW_TITLE);
+			Raylib.SetTargetFPS(60);
 
-			while (!Rl.WindowShouldClose())
+			while (!Raylib.WindowShouldClose())
 			{
-				Rl.BeginDrawing();
-				Rl.ClearBackground(R.Color.RAYWHITE);
-				Rl.BeginMode2D(Camera.RCamera);
+				Raylib.BeginDrawing();
+				Raylib.ClearBackground(Color.RAYWHITE);
+				Raylib.BeginMode2D(Camera!.RCamera);
 
 				foreach (var system in Systems)
 				{
 					system.Update();
 				}
 
-				Rl.EndMode2D();
-				Rl.EndDrawing();
+				Raylib.EndMode2D();
+				Raylib.EndDrawing();
 			}
 
-			Rl.CloseWindow();
+			Raylib.CloseWindow();
 		}
 	}
 }

@@ -1,10 +1,12 @@
-﻿namespace puzzle_game.Game.Components
+﻿using Raylib_cs;
+
+namespace puzzle_game.Game.Components
 {
     public class Render : IComponent
     {
-        public R.Color FillColor { get; set; }
+        public Color FillColor { get; set; }
 
-        public Render(R.Color color)
+        public Render(Color color)
         {
             FillColor = color;
         }

@@ -38,7 +38,7 @@ namespace puzzle_game.Game.Systems
             if (body.Shape is Rectangle)
             {
                 var rect = (Rectangle)body.Shape;
-                Rl.DrawRectangle(body.X, body.Y, rect.Width, rect.Height, render.FillColor);
+                Raylib_cs.Raylib.DrawRectangle(body.X, body.Y, rect.Width, rect.Height, render.FillColor);
             }
         }
     }

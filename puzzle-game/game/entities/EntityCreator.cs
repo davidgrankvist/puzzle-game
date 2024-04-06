@@ -40,7 +40,7 @@ namespace puzzle_game.Game.Entities
 
             ground.AddComponent(new Body(0, y, new Rectangle(Constants.WINDOW_WIDTH, height)));
             ground.AddComponent(new PhysicsBody());
-            ground.AddComponent(new Render(R.Color.BLACK));
+            ground.AddComponent(new Render(Raylib_cs.Color.BLACK));
 
             return ground;
         }
@@ -54,7 +54,7 @@ namespace puzzle_game.Game.Entities
 
             ground.AddComponent(new Body(400, y, new Rectangle(width, height)));
             ground.AddComponent(new PhysicsBody());
-            ground.AddComponent(new Render(R.Color.BLACK));
+            ground.AddComponent(new Render(Raylib_cs.Color.BLACK));
 
             return ground;
         }
@@ -68,7 +68,7 @@ namespace puzzle_game.Game.Entities
 
             ground.AddComponent(new Body(450, y, new Rectangle(width, height)));
             ground.AddComponent(new PhysicsBody());
-            ground.AddComponent(new Render(R.Color.BLACK));
+            ground.AddComponent(new Render(Raylib_cs.Color.BLACK));
 
             return ground;
         }
@@ -87,7 +87,7 @@ namespace puzzle_game.Game.Entities
             player.AddComponent(new KeyboardControl());
             player.AddComponent(new PhysicsBody());
             player.AddComponent(new Gravity());
-            player.AddComponent(new Render(R.Color.BLUE));
+            player.AddComponent(new Render(Raylib_cs.Color.BLUE));
 
             return player;
         }

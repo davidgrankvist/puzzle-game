@@ -8,15 +8,15 @@ namespace puzzle_game.Game.Systems
     {
         // These are for avoiding allocating Raylib structs over and over again while running collision detection.
         // Should probably be in the components instead..
-        R.Rectangle playerRlRectNextX;
-        R.Rectangle playerRlRectNextY;
-        R.Rectangle entityRlRect;
+        Raylib_cs.Rectangle playerRlRectNextX;
+        Raylib_cs.Rectangle playerRlRectNextY;
+        Raylib_cs.Rectangle entityRlRect;
 
         public CollisionDetectionService()
         {
-            playerRlRectNextX = new R.Rectangle();
-            playerRlRectNextY = new R.Rectangle();
-            entityRlRect = new R.Rectangle();
+            playerRlRectNextX = new Raylib_cs.Rectangle();
+            playerRlRectNextY = new Raylib_cs.Rectangle();
+            entityRlRect = new Raylib_cs.Rectangle();
         }
 
         public void CheckAndApplyCollisions(List<Entity> physicsEntities)
@@ -64,8 +64,8 @@ namespace puzzle_game.Game.Systems
                 entityRlRect.Width = entityRect.Width;
                 entityRlRect.Height = entityRect.Height;
 
-                bool willCollideX = Rl.CheckCollisionRecs(playerRlRectNextX, entityRlRect);
-                bool willCollideY = Rl.CheckCollisionRecs(playerRlRectNextY, entityRlRect);
+                bool willCollideX = Raylib_cs.Raylib.CheckCollisionRecs(playerRlRectNextX, entityRlRect);
+                bool willCollideY = Raylib_cs.Raylib.CheckCollisionRecs(playerRlRectNextY, entityRlRect);
 
                 if (willCollideX)
                 {

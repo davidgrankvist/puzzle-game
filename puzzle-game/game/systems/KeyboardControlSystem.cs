@@ -1,7 +1,7 @@
 ﻿using puzzle_game.Game.Common;
 using puzzle_game.Game.Components;
 using puzzle_game.Game.Entities;
-using System.Numerics;
+using Raylib_cs;
 
 namespace puzzle_game.Game.Systems
 {
@@ -34,11 +34,11 @@ namespace puzzle_game.Game.Systems
             }
             var camera = cameraEntity.GetComponentUnsafe<Camera>();
 
-            if (Rl.IsKeyDown(R.KeyboardKey.KEY_LEFT))
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
             {
                 camera.Rotation -= Constants.CAMERA_ROTATION_SPEED;
             }
-            if (Rl.IsKeyDown(R.KeyboardKey.KEY_RIGHT))
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
             {
                 camera.Rotation += Constants.CAMERA_ROTATION_SPEED;
             }
@@ -61,18 +61,18 @@ namespace puzzle_game.Game.Systems
 
             // jump
             // could be mid-air with Vy = 0, but that's hard to time with a jump keypress
-            if (body.Vy == 0 && Rl.IsKeyPressed(R.KeyboardKey.KEY_W))
+            if (body.Vy == 0 && Raylib.IsKeyPressed(KeyboardKey.KEY_W))
             {
                 body.Vy = -Constants.PLAYER_JUMP_SPEED;
             }
 
             // move left/right
             body.Vx = 0;
-            if (Rl.IsKeyDown(R.KeyboardKey.KEY_A))
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
             {
                 body.Vx = -Constants.PLAYER_SPEED;
             }
-            if (Rl.IsKeyDown(R.KeyboardKey.KEY_D))
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
             {
                 body.Vx = Constants.PLAYER_SPEED;
             }

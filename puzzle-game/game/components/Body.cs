@@ -4,12 +4,12 @@ namespace puzzle_game.Game.Components
 {
     public class Body : IComponent
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
 
         public IShape Shape { get; set; }
 
-        public Body(int x, int y, IShape shape)
+        public Body(float x, float y, IShape shape)
         {
             X = x;
             Y = y;

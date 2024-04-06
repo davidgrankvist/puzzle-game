@@ -2,8 +2,8 @@
 {
     public class PhysicsBody : IComponent
     {
-        public int Vx { get; set; }
-        public int Vy { get; set; }
+        public float Vx { get; set; }
+        public float Vy { get; set; }
 
         public PhysicsBody()
         {
@@ -11,7 +11,7 @@
             Vy = 0;
         }
 
-        public PhysicsBody(int vx, int vy)
+        public PhysicsBody(float vx, float vy)
         {
             Vx = vx;
             Vy = vy;

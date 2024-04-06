@@ -2,9 +2,9 @@
 {
     public class Gravity : IComponent
     {
-        static int DEFAULT_GRAVITY = 1;
+        static float DEFAULT_GRAVITY = 1;
 
-        public int Ay { get; set; }
+        public float Ay { get; set; }
 
         public Gravity()
         {

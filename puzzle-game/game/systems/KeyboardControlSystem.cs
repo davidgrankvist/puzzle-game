@@ -41,8 +41,8 @@ namespace puzzle_game.Game.Systems
             if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
             {
                 camera.Rotation += Constants.CAMERA_ROTATION_SPEED;
-            }
-        }
+			}
+		}
 
         void UpdatePlayer()
         {

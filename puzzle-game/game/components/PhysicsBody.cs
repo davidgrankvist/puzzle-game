@@ -1,7 +1,7 @@
-﻿namespace puzzle_game
+﻿namespace puzzle_game.Game.Components
 {
-	public class PhysicsBody : IComponent
-	{
+    public class PhysicsBody : IComponent
+    {
         public int Vx { get; set; }
         public int Vy { get; set; }
 

@@ -1,6 +1,6 @@
-﻿namespace puzzle_game
+﻿namespace puzzle_game.Game.Common
 {
-	public interface IShape
-	{
-	}
+    public interface IShape
+    {
+    }
 }

@@ -1,8 +1,12 @@
-﻿using System.Numerics;
+﻿using puzzle_game.Game.Common;
+using puzzle_game.Game.Components;
+using puzzle_game.Game.Entities;
+using puzzle_game.Game.Systems;
+using System.Numerics;
 
-namespace puzzle_game
+namespace puzzle_game.Game
 {
-	public class Game
+    public class Game
 	{
 		List<Entity> Entities;
 		List<ISystem> Systems;

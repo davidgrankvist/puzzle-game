@@ -1,8 +1,8 @@
-﻿namespace puzzle_game
+﻿namespace puzzle_game.Game.Systems
 {
-	public interface ISystem
-	{
-		public void Load();
-		public void Update();
-	}
+    public interface ISystem
+    {
+        public void Load();
+        public void Update();
+    }
 }

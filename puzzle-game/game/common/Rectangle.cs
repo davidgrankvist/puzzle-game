@@ -1,7 +1,7 @@
-﻿namespace puzzle_game
+﻿namespace puzzle_game.Game.Common
 {
-	public class Rectangle : IShape
-	{
+    public class Rectangle : IShape
+    {
         public int Width { get; set; }
         public int Height { get; set; }
 

@@ -1,6 +1,6 @@
-﻿namespace puzzle_game
+﻿namespace puzzle_game.Game.Components
 {
-	public class KeyboardControl  : IComponent
-	{
-	}
+    public class KeyboardControl : IComponent
+    {
+    }
 }

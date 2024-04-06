@@ -7,7 +7,7 @@ namespace puzzle_game.Game.Components
         public float X { get; set; }
         public float Y { get; set; }
 
-        public IShape Shape { get; set; }
+		public IShape Shape { get; set; }
 
         public Body(float x, float y, IShape shape)
         {

@@ -1,6 +1,7 @@
 ﻿using puzzle_game.Game.Common;
 using puzzle_game.Game.Components;
 using puzzle_game.Game.Entities;
+using Raylib_cs;
 
 namespace puzzle_game.Game.Systems
 {
@@ -49,10 +50,28 @@ namespace puzzle_game.Game.Systems
                 var physicsBody = entity.GetComponentUnsafe<PhysicsBody>();
                 var gravity = entity.GetComponentUnsafe<Gravity>();
 
-                // accelerates way too fast, so cap it for now
-                if (physicsBody.Vy < Constants.PLAYER_SPEED * 2)
+				var cameraEntity = Entities.Find(entity => entity.HasComponent<Camera>());
+				if (cameraEntity == null)
+				{
+					return;
+				}
+				var camera = cameraEntity.GetComponentUnsafe<Camera>();
+				var angle = -camera.Rotation * MathF.PI / 180f;
+
+                var vx = physicsBody.Vx;
+                var vy = physicsBody.Vy;
+
+				var gravityDx = -MathF.Sin(angle);
+				var gravityDy =  MathF.Cos(angle);
+                var ax = gravityDx * gravity.Ay;
+                var ay = gravityDy * gravity.Ay;
+
+                // update velocity, but also cap it as it accelerates very quickly
+				var totalVelocityTowardsGravity = vx * gravityDx + vy * gravityDy;
+				if (totalVelocityTowardsGravity < Constants.PLAYER_SPEED * 2)
                 {
-                    physicsBody.Vy += gravity.Ay;
+                    physicsBody.Vx += ax;
+                    physicsBody.Vy += ay;
                 }
             }
         }

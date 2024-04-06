@@ -77,13 +77,10 @@ namespace puzzle_game.Game.Entities
         {
             var player = new Entity();
 
-            const int x = 50;
-            const int y = Constants.WINDOW_HEIGHT / 2;
-
             const int width = 10;
             const int height = 15;
 
-            player.AddComponent(new Body(x, y, new Rectangle(width, height)));
+            player.AddComponent(new Body(Constants.PLAYER_START_X, Constants.PLAYER_START_Y, new Rectangle(width, height)));
             player.AddComponent(new KeyboardControl());
             player.AddComponent(new PhysicsBody());
             player.AddComponent(new Gravity());
@@ -99,7 +96,7 @@ namespace puzzle_game.Game.Entities
                 target: new Vector2(Constants.CAMERA_TARGET_X, Constants.CAMERA_TARGET_Y),
                 offset: new Vector2(Constants.CAMERA_TARGET_X, Constants.CAMERA_TARGET_Y),
                 rotation: 0,
-                zoom: 1f
+                zoom: Constants.CAMERA_ZOOM
             );
             camera.AddComponent(cameraComponent);
 

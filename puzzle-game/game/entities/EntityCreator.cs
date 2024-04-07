@@ -77,10 +77,9 @@ namespace puzzle_game.Game.Entities
         {
             var player = new Entity();
 
-            const int width = 10;
-            const int height = 15;
+            const float radius = 12;
 
-            player.AddComponent(new Body(Constants.PLAYER_START_X, Constants.PLAYER_START_Y, new Rectangle(width, height)));
+            player.AddComponent(new Body(Constants.PLAYER_START_X, Constants.PLAYER_START_Y, new Circle(radius)));
             player.AddComponent(new KeyboardControl());
             player.AddComponent(new PhysicsBody());
             player.AddComponent(new Gravity());

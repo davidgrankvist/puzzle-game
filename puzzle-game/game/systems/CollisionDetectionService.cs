@@ -1,21 +1,21 @@
 ﻿using puzzle_game.Game.Common;
 using puzzle_game.Game.Components;
 using puzzle_game.Game.Entities;
+using System.Numerics;
 
 namespace puzzle_game.Game.Systems
 {
     public class CollisionDetectionService
     {
-        // These are for avoiding allocating Raylib structs over and over again while running collision detection.
-        // Should probably be in the components instead..
-        Raylib_cs.Rectangle playerRlRectNextX;
-        Raylib_cs.Rectangle playerRlRectNextY;
+        // These are for avoiding allocating structs over and over again while running collision detection.
+        Vector2 playerPosNextX;
+        Vector2 playerPosNextY;
         Raylib_cs.Rectangle entityRlRect;
 
         public CollisionDetectionService()
         {
-            playerRlRectNextX = new Raylib_cs.Rectangle();
-            playerRlRectNextY = new Raylib_cs.Rectangle();
+            playerPosNextX = new Vector2();
+            playerPosNextY = new Vector2();
             entityRlRect = new Raylib_cs.Rectangle();
         }
 
@@ -31,22 +31,18 @@ namespace puzzle_game.Game.Systems
 
             var playerPhysics = player.GetComponentUnsafe<PhysicsBody>();
             var playerBody = player.GetComponentUnsafe<Body>();
-            if (playerBody.Shape is not Rectangle)
+            if (playerBody.Shape is not Circle)
             {
                 return;
             }
 
-            var playerRect = (Rectangle)playerBody.Shape;
+            var playerCircle = (Circle)playerBody.Shape;
 
-            playerRlRectNextX.X = playerBody.X + playerPhysics.Vx;
-            playerRlRectNextX.Y = playerBody.Y;
-            playerRlRectNextX.Width = playerRect.Width;
-            playerRlRectNextX.Height = playerRect.Height;
-
-            playerRlRectNextY.X = playerBody.X;
-            playerRlRectNextY.Y = playerBody.Y + playerPhysics.Vy;
-            playerRlRectNextY.Width = playerRect.Width;
-            playerRlRectNextY.Height = playerRect.Height;
+            playerPosNextX.X = playerBody.X + playerPhysics.Vx;
+            playerPosNextX.Y = playerBody.Y;
+            
+            playerPosNextY.X = playerBody.X;
+			playerPosNextY.Y = playerBody.Y + playerPhysics.Vy;
 
             foreach (var entity in physicsEntities)
             {
@@ -65,8 +61,8 @@ namespace puzzle_game.Game.Systems
                 entityRlRect.Width = entityRect.Width;
                 entityRlRect.Height = entityRect.Height;
 
-                bool willCollideX = Raylib_cs.Raylib.CheckCollisionRecs(playerRlRectNextX, entityRlRect);
-                bool willCollideY = Raylib_cs.Raylib.CheckCollisionRecs(playerRlRectNextY, entityRlRect);
+                bool willCollideX = Raylib_cs.Raylib.CheckCollisionCircleRec(playerPosNextX, playerCircle.Radius, entityRlRect);
+                bool willCollideY = Raylib_cs.Raylib.CheckCollisionCircleRec(playerPosNextY, playerCircle.Radius, entityRlRect);
 
                 if (willCollideX)
                 {

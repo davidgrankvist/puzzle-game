@@ -39,7 +39,11 @@ namespace puzzle_game.Game.Systems
             {
                 var rect = (Rectangle)body.Shape;
                 Raylib_cs.Raylib.DrawRectangle((int)body.X, (int)body.Y, rect.Width, rect.Height, render.FillColor);
-            }
-        }
+            } else if (body.Shape is Circle)
+            {
+                var circle = (Circle)body.Shape;
+				Raylib_cs.Raylib.DrawCircle((int)body.X, (int)body.Y, circle.Radius, render.FillColor);
+			}
+		}
     }
 }

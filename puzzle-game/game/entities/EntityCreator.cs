@@ -82,7 +82,7 @@ namespace puzzle_game.Game.Entities
             player.AddComponent(new Body(Constants.PLAYER_START_X, Constants.PLAYER_START_Y, new Circle(radius)));
             player.AddComponent(new KeyboardControl());
             player.AddComponent(new PhysicsBody());
-            player.AddComponent(new Gravity());
+            player.AddComponent(new Gravity(Constants.PLAYER_GRAVITY));
             player.AddComponent(new Render(Raylib_cs.Color.BLUE));
 
             return player;

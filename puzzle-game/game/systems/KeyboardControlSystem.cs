@@ -91,7 +91,7 @@ namespace puzzle_game.Game.Systems
 			var vy = body.Vy;
 
 			var camera = cameraEntity.GetComponentUnsafe<Camera>();
-            var angle = -camera.Rotation * MathF.PI / 180f;
+            var angle = -camera.RotationRadians;
 
 			var angleHorizontalMovement = angle + MathF.PI / 2;
 			var angleJumpMovement = angle + MathF.PI;

@@ -19,8 +19,9 @@ namespace puzzle_game.Game.Systems
             entityRlRect = new Raylib_cs.Rectangle();
         }
 
-        public void CheckAndApplyCollisions(List<Entity> physicsEntities)
+        public void CheckAndApplyCollisions(List<Entity> entities)
         {
+            var physicsEntities = entities.Where(entity => entity.HasComponent<Body>() && entity.HasComponent<PhysicsBody>()).ToList();
             var player = physicsEntities.Find((entity) => entity.HasComponent<KeyboardControl>());
 
             if (player == null)

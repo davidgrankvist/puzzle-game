@@ -1,7 +1,6 @@
 ﻿using puzzle_game.Game.Common;
 using puzzle_game.Game.Components;
 using puzzle_game.Game.Entities;
-using Raylib_cs;
 
 namespace puzzle_game.Game.Systems
 {
@@ -21,29 +20,14 @@ namespace puzzle_game.Game.Systems
 
         public void Update()
         {
-            var physicsEntities = Entities
-                .Where(IsPhysicsEntity)
-                .ToList();
-
-            if (physicsEntities == null || physicsEntities.Count == 0)
-            {
-                return;
-            }
-
-            ApplyGravity(physicsEntities);
-            CollisionDetectionService.CheckAndApplyCollisions(physicsEntities);
-            MoveEntities(physicsEntities);
+            ApplyGravity();
+            CollisionDetectionService.CheckAndApplyCollisions(Entities);
+            MoveEntities();
         }
 
-        bool IsPhysicsEntity(Entity entity)
+        void ApplyGravity()
         {
-            return entity.HasComponent<PhysicsBody>()
-                && entity.HasComponent<Body>();
-        }
-
-        void ApplyGravity(List<Entity> physicsEntities)
-        {
-            var entitiesWithGravity = physicsEntities.Where((entity) => entity.HasComponent<Gravity>()).ToList();
+            var entitiesWithGravity = Entities.Where((entity) => entity.HasComponent<Gravity>()).ToList();
 
             foreach (var entity in entitiesWithGravity)
             {
@@ -56,7 +40,7 @@ namespace puzzle_game.Game.Systems
 					return;
 				}
 				var camera = cameraEntity.GetComponentUnsafe<Camera>();
-				var angle = -camera.Rotation * MathF.PI / 180f;
+				var angle = -camera.RotationRadians;
 
                 var vx = physicsBody.Vx;
                 var vy = physicsBody.Vy;
@@ -76,9 +60,9 @@ namespace puzzle_game.Game.Systems
             }
         }
 
-        void MoveEntities(List<Entity> physicsEntities)
+        void MoveEntities()
         {
-            var player = physicsEntities.Find((entity) => entity.HasComponent<KeyboardControl>());
+            var player = Entities.Find((entity) => entity.HasComponent<KeyboardControl>());
 
             if (player == null)
             {

@@ -146,7 +146,7 @@ namespace puzzle_game.Game.Systems
 			var jumpDeltaY = MathF.Cos(angleJumpMovement) * Constants.PLAYER_JUMP_SPEED;
 
 			// jump if stationary along y axis
-			if (Raylib.IsKeyPressed(KeyboardKey.KEY_W) && vy < 0.1)
+			if (Raylib.IsKeyPressed(KeyboardKey.KEY_W) && vy == 0)
 			{
 				vxNew += jumpDeltaX;
 				vyNew += jumpDeltaY;

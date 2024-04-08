@@ -145,8 +145,10 @@ namespace puzzle_game.Game.Systems
 			var jumpDeltaX = -MathF.Sin(angleJumpMovement) * Constants.PLAYER_JUMP_SPEED;
 			var jumpDeltaY = MathF.Cos(angleJumpMovement) * Constants.PLAYER_JUMP_SPEED;
 
-			// jump if stationary along y axis
-			if (Raylib.IsKeyPressed(KeyboardKey.KEY_W) && vy == 0)
+			var isVertical = Math.Abs(MathF.Sin(angle)) > 0.5;
+			var isOnSurface = isVertical ? vxNew == 0 : vyNew == 0;
+
+			if (Raylib.IsKeyPressed(KeyboardKey.KEY_W) && isOnSurface)
 			{
 				vxNew += jumpDeltaX;
 				vyNew += jumpDeltaY;

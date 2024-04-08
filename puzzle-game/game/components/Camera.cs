@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace puzzle_game.Game.Components
 {
-    class Camera : IComponent
+    public class Camera : IComponent
     {
         private Camera2D camera;
 

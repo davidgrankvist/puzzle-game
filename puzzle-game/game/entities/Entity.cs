@@ -5,32 +5,32 @@ namespace puzzle_game.Game.Entities
     public class Entity
     {
         public Guid Id { get; }
-        List<IComponent> Components;
+        private List<IComponent> components;
 
         public Entity()
         {
             Id = Guid.NewGuid();
-            Components = new List<IComponent>();
+            components = new List<IComponent>();
         }
 
         public void AddComponent(IComponent component)
         {
-            Components.Add(component);
+            components.Add(component);
         }
 
         public bool HasComponent<T>() where T : IComponent
         {
-            return Components.OfType<T>().Any();
+            return components.OfType<T>().Any();
         }
 
         public T? GetComponent<T>() where T : IComponent
         {
-            return Components.OfType<T>().FirstOrDefault();
+            return components.OfType<T>().FirstOrDefault();
 
         }
         public T GetComponentUnsafe<T>() where T : IComponent
         {
-            return Components.OfType<T>().First();
+            return components.OfType<T>().First();
         }
     }
 }

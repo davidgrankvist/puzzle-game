@@ -6,13 +6,13 @@ namespace puzzle_game.Game.Systems
 {
     public class PhysicsSystem : ISystem
     {
-        List<Entity> Entities;
-        CollisionDetectionService CollisionDetectionService;
+        private List<Entity> entities;
+        private CollisionDetectionService collisionDetectionService;
 
         public PhysicsSystem(List<Entity> entities)
         {
-            Entities = entities;
-            CollisionDetectionService = new CollisionDetectionService();
+            this.entities = entities;
+            collisionDetectionService = new CollisionDetectionService();
         }
         public void Load()
         {
@@ -21,20 +21,20 @@ namespace puzzle_game.Game.Systems
         public void Update()
         {
             ApplyGravity();
-            CollisionDetectionService.CheckAndApplyCollisions(Entities);
+            collisionDetectionService.CheckAndApplyCollisions(entities);
             MoveEntities();
         }
 
-        void ApplyGravity()
+        private void ApplyGravity()
         {
-            var entitiesWithGravity = Entities.Where((entity) => entity.HasComponent<Gravity>()).ToList();
+            var entitiesWithGravity = entities.Where((entity) => entity.HasComponent<Gravity>()).ToList();
 
             foreach (var entity in entitiesWithGravity)
             {
                 var physicsBody = entity.GetComponentUnsafe<PhysicsBody>();
                 var gravity = entity.GetComponentUnsafe<Gravity>();
 
-				var cameraEntity = Entities.Find(entity => entity.HasComponent<Camera>());
+				var cameraEntity = entities.Find(entity => entity.HasComponent<Camera>());
 				if (cameraEntity == null)
 				{
 					return;
@@ -60,9 +60,9 @@ namespace puzzle_game.Game.Systems
             }
         }
 
-        void MoveEntities()
+        private void MoveEntities()
         {
-            var player = Entities.Find((entity) => entity.HasComponent<KeyboardControl>());
+            var player = entities.Find((entity) => entity.HasComponent<KeyboardControl>());
 
             if (player == null)
             {

@@ -8,9 +8,9 @@ namespace puzzle_game.Game.Systems
     public class CollisionDetectionService
     {
         // These are for avoiding allocating structs over and over again while running collision detection.
-        Vector2 playerPosNextX;
-        Vector2 playerPosNextY;
-        Raylib_cs.Rectangle entityRlRect;
+        private Vector2 playerPosNextX;
+        private Vector2 playerPosNextY;
+        private Raylib_cs.Rectangle entityRlRect;
 
         public CollisionDetectionService()
         {

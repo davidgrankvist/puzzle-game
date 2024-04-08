@@ -9,28 +9,28 @@ namespace puzzle_game.Game
 {
     public class Game
 	{
-		List<Entity> Entities;
-		List<ISystem> Systems;
-		Camera? Camera;
+		private List<Entity> entities;
+		private List<ISystem> systems;
+		private Camera? camera;
 
 
 		public Game()
 		{
-			Entities = new List<Entity>();
+			entities = new List<Entity>();
 			var mazeProvider = new TestMazeProvider();
 
-			Systems = new List<ISystem>
+			systems = new List<ISystem>
 			{
-				new SpawnSystem(Entities, mazeProvider),
-				new KeyboardControlSystem(Entities),
-				new PhysicsSystem(Entities),
-				new RenderSystem(Entities)
+				new SpawnSystem(entities, mazeProvider),
+				new KeyboardControlSystem(entities),
+				new PhysicsSystem(entities),
+				new RenderSystem(entities)
 			};
 		}
 
 		public void Run()
 		{
-			foreach (var system in Systems)
+			foreach (var system in systems)
 			{
 				system.Load();
 			}
@@ -38,17 +38,17 @@ namespace puzzle_game.Game
 			GameLoop();
 		}
 
-		void InitializeCamera()
+		private void InitializeCamera()
 		{
-			var cameraEntity = Entities.Find(entity => entity.HasComponent<Camera>());
+			var cameraEntity = entities.Find(entity => entity.HasComponent<Camera>());
 			if (cameraEntity == null)
 			{
 				throw new InvalidOperationException("No camera entity found. Please make sure that the spawn system is loaded.");
 			}
-			Camera = cameraEntity.GetComponentUnsafe<Camera>();
+			camera = cameraEntity.GetComponentUnsafe<Camera>();
 		}
 
-		void GameLoop()
+		private void GameLoop()
 		{
 			Raylib.InitWindow(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT, Constants.WINDOW_TITLE);
 			Raylib.SetTargetFPS(60);
@@ -57,9 +57,9 @@ namespace puzzle_game.Game
 			{
 				Raylib.BeginDrawing();
 				Raylib.ClearBackground(Color.RAYWHITE);
-				Raylib.BeginMode2D(Camera!.RCamera);
+				Raylib.BeginMode2D(camera!.RCamera);
 
-				foreach (var system in Systems)
+				foreach (var system in systems)
 				{
 					system.Update();
 				}

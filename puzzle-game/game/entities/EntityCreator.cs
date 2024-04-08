@@ -19,10 +19,7 @@ namespace puzzle_game.Game.Entities
 
             entity.AddComponent(new Body(block.X, block.Y, new Rectangle(block.Width, block.Height)));
             entity.AddComponent(new PhysicsBody());
-            if (block.ShouldRender)
-            {
-                entity.AddComponent(new Render(Raylib_cs.Color.BLACK));
-            }
+            entity.AddComponent(new Render(Raylib_cs.Color.BLACK));
 
             return entity;
         }

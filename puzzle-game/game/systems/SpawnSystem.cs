@@ -5,20 +5,20 @@ namespace puzzle_game.Game.Systems
 {
     public class SpawnSystem : ISystem
     {
-        List<Entity> Entities;
-        IMazeProvider mazeProvider;
+        private List<Entity> entities;
+        private IMazeProvider mazeProvider;
 
         public SpawnSystem(List<Entity> entities, IMazeProvider mazeProvider)
         {
-            Entities = entities;
+            this.entities = entities;
             this.mazeProvider = mazeProvider;
         }
 
         public void Load()
         {
-            Entities.AddRange(EntityCreator.CreateMaze(mazeProvider.GetMaze()));
-            Entities.Add(EntityCreator.CreatePlayer());
-            Entities.Add(EntityCreator.CreateCamera());
+            entities.AddRange(EntityCreator.CreateMaze(mazeProvider.GetMaze()));
+            entities.Add(EntityCreator.CreatePlayer());
+            entities.Add(EntityCreator.CreateCamera());
         }
 
         public void Update()

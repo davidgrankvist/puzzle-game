@@ -8,11 +8,11 @@ namespace puzzle_game.Game.Systems
 {
     public class KeyboardControlSystem : ISystem
     {
-        List<Entity> Entities;
+        private List<Entity> entities;
 
         public KeyboardControlSystem(List<Entity> entities)
         {
-            Entities = entities;
+            this.entities = entities;
         }
 
         public void Load()
@@ -30,7 +30,7 @@ namespace puzzle_game.Game.Systems
 		private void HandleReset()
 		{
 
-			var player = Entities.Find((entity) => entity.HasComponent<KeyboardControl>());
+			var player = entities.Find((entity) => entity.HasComponent<KeyboardControl>());
 			if (player == null)
 			{
 				return;
@@ -49,7 +49,7 @@ namespace puzzle_game.Game.Systems
 
 		void UpdateCamera()
         {
-            var cameraEntity = Entities.Find(entity => entity.HasComponent<Camera>());
+            var cameraEntity = entities.Find(entity => entity.HasComponent<Camera>());
             if (cameraEntity == null)
             {
                 return;
@@ -68,7 +68,7 @@ namespace puzzle_game.Game.Systems
 
         void UpdatePlayer()
         {
-            var player = Entities.Find((entity) => entity.HasComponent<KeyboardControl>());
+            var player = entities.Find((entity) => entity.HasComponent<KeyboardControl>());
             if (player == null)
             {
                 return;
@@ -81,7 +81,7 @@ namespace puzzle_game.Game.Systems
                 return;
             }
 
-            var cameraEntity = Entities.Find(entity => entity.HasComponent<Camera>());
+            var cameraEntity = entities.Find(entity => entity.HasComponent<Camera>());
             if (cameraEntity == null)
             {
                 return;

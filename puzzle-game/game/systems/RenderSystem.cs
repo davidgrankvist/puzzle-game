@@ -4,13 +4,13 @@ using puzzle_game.Game.Entities;
 
 namespace puzzle_game.Game.Systems
 {
-    class RenderSystem : ISystem
+    public class RenderSystem : ISystem
     {
-        List<Entity> Entities;
+        private List<Entity> entities;
 
         public RenderSystem(List<Entity> entities)
         {
-            Entities = entities;
+            this.entities = entities;
         }
 
         public void Load()
@@ -19,13 +19,13 @@ namespace puzzle_game.Game.Systems
 
         public void Update()
         {
-            foreach (var entity in Entities)
+            foreach (var entity in entities)
             {
-                renderEntity(entity);
+                RenderEntity(entity);
             }
         }
 
-        void renderEntity(Entity entity)
+        private void RenderEntity(Entity entity)
         {
             var render = entity.GetComponent<Render>();
             var body = entity.GetComponent<Body>();

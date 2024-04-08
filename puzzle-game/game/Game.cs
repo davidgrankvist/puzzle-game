@@ -1,6 +1,7 @@
 ﻿using puzzle_game.Game.Common;
 using puzzle_game.Game.Components;
 using puzzle_game.Game.Entities;
+using puzzle_game.Game.Mazes;
 using puzzle_game.Game.Systems;
 using Raylib_cs;
 
@@ -16,10 +17,11 @@ namespace puzzle_game.Game
 		public Game()
 		{
 			Entities = new List<Entity>();
+			var mazeProvider = new TestMazeProvider();
 
 			Systems = new List<ISystem>
 			{
-				new SpawnSystem(Entities),
+				new SpawnSystem(Entities, mazeProvider),
 				new KeyboardControlSystem(Entities),
 				new PhysicsSystem(Entities),
 				new RenderSystem(Entities)

@@ -1,76 +1,30 @@
 ﻿using puzzle_game.Game.Common;
 using puzzle_game.Game.Components;
+using puzzle_game.Game.Mazes;
 using System.Numerics;
 
 namespace puzzle_game.Game.Entities
 {
     public class EntityCreator
     {
-        public static IEnumerable<Entity> CreateLevelTiles()
+        public static IEnumerable<Entity> CreateMaze(Maze maze)
         {
-            List<Entity> levelEntities = new List<Entity>();
+            var blocks = maze.Blocks;
+            return blocks.Select(ToEntity).ToList();
+		}
 
-            var borderTop = new Entity();
-            borderTop.AddComponent(new Body(0, -1, new Rectangle(Constants.WINDOW_WIDTH, 1)));
-            borderTop.AddComponent(new PhysicsBody());
-
-            var borderLeft = new Entity();
-            borderLeft.AddComponent(new Body(-1, 0, new Rectangle(1, Constants.WINDOW_HEIGHT)));
-            borderLeft.AddComponent(new PhysicsBody());
-
-            var borderRight = new Entity();
-            borderRight.AddComponent(new Body(Constants.WINDOW_WIDTH, 0, new Rectangle(1, Constants.WINDOW_HEIGHT)));
-            borderRight.AddComponent(new PhysicsBody());
-
-            levelEntities.Add(borderTop);
-            levelEntities.Add(borderLeft);
-            levelEntities.Add(borderRight);
-            levelEntities.Add(CreateGround());
-            levelEntities.Add(CreateObstacle());
-            levelEntities.Add(CreateFlyingObstacle());
-
-            return levelEntities;
-        }
-        public static Entity CreateGround()
+        private static Entity ToEntity(MazeBlock block)
         {
-            var ground = new Entity();
+            var entity = new Entity();
 
-            const int height = 50;
-            const int y = Constants.WINDOW_HEIGHT - height;
+            entity.AddComponent(new Body(block.X, block.Y, new Rectangle(block.Width, block.Height)));
+            entity.AddComponent(new PhysicsBody());
+            if (block.ShouldRender)
+            {
+                entity.AddComponent(new Render(Raylib_cs.Color.BLACK));
+            }
 
-            ground.AddComponent(new Body(0, y, new Rectangle(Constants.WINDOW_WIDTH, height)));
-            ground.AddComponent(new PhysicsBody());
-            ground.AddComponent(new Render(Raylib_cs.Color.BLACK));
-
-            return ground;
-        }
-        public static Entity CreateObstacle()
-        {
-            var ground = new Entity();
-
-            const int width = 50;
-            const int height = 50;
-            const int y = Constants.WINDOW_HEIGHT - 100;
-
-            ground.AddComponent(new Body(400, y, new Rectangle(width, height)));
-            ground.AddComponent(new PhysicsBody());
-            ground.AddComponent(new Render(Raylib_cs.Color.BLACK));
-
-            return ground;
-        }
-        public static Entity CreateFlyingObstacle()
-        {
-            var ground = new Entity();
-
-            const int width = 80;
-            const int height = 50;
-            const int y = Constants.WINDOW_HEIGHT - 200;
-
-            ground.AddComponent(new Body(450, y, new Rectangle(width, height)));
-            ground.AddComponent(new PhysicsBody());
-            ground.AddComponent(new Render(Raylib_cs.Color.BLACK));
-
-            return ground;
+            return entity;
         }
 
         public static Entity CreatePlayer()

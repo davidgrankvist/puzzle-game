@@ -1,4 +1,5 @@
 ﻿using puzzle_game.Game;
+using puzzle_game.Game.Mazes.MazeGeneration;
 
 namespace puzzle_game
 {

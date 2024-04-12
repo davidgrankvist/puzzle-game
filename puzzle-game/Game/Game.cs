@@ -2,6 +2,7 @@
 using puzzle_game.Game.Components;
 using puzzle_game.Game.Entities;
 using puzzle_game.Game.Mazes;
+using puzzle_game.Game.Mazes.MazeGeneration;
 using puzzle_game.Game.Systems;
 using Raylib_cs;
 
@@ -13,11 +14,10 @@ namespace puzzle_game.Game
 		private List<ISystem> systems;
 		private Camera? camera;
 
-
 		public Game()
 		{
 			entities = new List<Entity>();
-			var mazeProvider = new TestMazeProvider();
+			var mazeProvider = new GeneratedMazeProvider(new RandomMazeGenerator(2652));
 
 			systems = new List<ISystem>
 			{
@@ -50,7 +50,7 @@ namespace puzzle_game.Game
 
 		private void GameLoop()
 		{
-			Raylib.InitWindow(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT, Constants.WINDOW_TITLE);
+			Raylib.InitWindow(GameConstants.WINDOW_WIDTH, GameConstants.WINDOW_HEIGHT, GameConstants.WINDOW_TITLE);
 			Raylib.SetTargetFPS(60);
 
 			while (!Raylib.WindowShouldClose())

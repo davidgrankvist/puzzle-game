@@ -8,6 +8,10 @@ namespace puzzle_game.Game.Mazes
 {
     public class Maze
     {
-		public IEnumerable<MazeBlock> Blocks { get; set; } = new List<MazeBlock>();    
+        public Maze(IEnumerable<MazeBlock> blocks)
+        {
+            Blocks = blocks;
+        }
+        public IEnumerable<MazeBlock> Blocks { get; }
     }
 }

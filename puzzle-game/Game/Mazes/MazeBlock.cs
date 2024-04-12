@@ -9,13 +9,10 @@ namespace puzzle_game.Game.Mazes
 	public struct MazeBlock
 	{
 
-		public float X;
-
-		public float Y;
-
-		public int Width;
-
-		public int Height;
+		public readonly float X;
+		public readonly float Y;
+		public readonly int Width;
+		public readonly int Height;
 
 		public MazeBlock(float x, float y, int width, int height)
         {

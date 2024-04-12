@@ -52,7 +52,7 @@ namespace puzzle_game.Game.Systems
 
                 // update velocity, but also cap it as it accelerates very quickly
 				var totalVelocityTowardsGravity = vx * gravityDx + vy * gravityDy;
-				if (totalVelocityTowardsGravity < Constants.PLAYER_SPEED * 2)
+				if (totalVelocityTowardsGravity < GameConstants.PLAYER_SPEED * 2)
                 {
                     physicsBody.Vx += ax;
                     physicsBody.Vy += ay;

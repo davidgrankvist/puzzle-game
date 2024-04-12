@@ -30,10 +30,10 @@ namespace puzzle_game.Game.Entities
 
             const float radius = 12;
 
-            player.AddComponent(new Body(Constants.PLAYER_START_X, Constants.PLAYER_START_Y, new Circle(radius)));
+            player.AddComponent(new Body(GameConstants.PLAYER_START_X, GameConstants.PLAYER_START_Y, new Circle(radius)));
             player.AddComponent(new KeyboardControl());
             player.AddComponent(new PhysicsBody());
-            player.AddComponent(new Gravity(Constants.PLAYER_GRAVITY));
+            player.AddComponent(new Gravity(GameConstants.PLAYER_GRAVITY));
             player.AddComponent(new Render(Raylib_cs.Color.BLUE));
 
             return player;
@@ -43,10 +43,10 @@ namespace puzzle_game.Game.Entities
         {
             var camera = new Entity();
             var cameraComponent = new Camera(
-                target: new Vector2(Constants.CAMERA_TARGET_X, Constants.CAMERA_TARGET_Y),
-                offset: new Vector2(Constants.CAMERA_TARGET_X, Constants.CAMERA_TARGET_Y),
+                target: new Vector2(GameConstants.CAMERA_TARGET_X, GameConstants.CAMERA_TARGET_Y),
+                offset: new Vector2(GameConstants.CAMERA_TARGET_X, GameConstants.CAMERA_TARGET_Y),
                 rotation: 0,
-                zoom: Constants.CAMERA_ZOOM
+                zoom: GameConstants.CAMERA_ZOOM
             );
             camera.AddComponent(cameraComponent);
 

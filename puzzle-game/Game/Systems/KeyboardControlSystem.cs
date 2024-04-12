@@ -40,8 +40,8 @@ namespace puzzle_game.Game.Systems
 
 			if (Raylib.IsKeyPressed(KeyboardKey.KEY_R))
 			{
-                body.X = Constants.PLAYER_START_X;
-                body.Y = Constants.PLAYER_START_Y;
+                body.X = GameConstants.PLAYER_START_X;
+                body.Y = GameConstants.PLAYER_START_Y;
                 physicsBody.Vx = 0;
                 physicsBody.Vy = 0;
 			}
@@ -58,11 +58,11 @@ namespace puzzle_game.Game.Systems
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
             {
-                camera.Rotation -= Constants.CAMERA_ROTATION_SPEED;
+                camera.Rotation -= GameConstants.CAMERA_ROTATION_SPEED;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
             {
-                camera.Rotation += Constants.CAMERA_ROTATION_SPEED;
+                camera.Rotation += GameConstants.CAMERA_ROTATION_SPEED;
 			}
 		}
 
@@ -101,8 +101,8 @@ namespace puzzle_game.Game.Systems
 
 			// ------ left/right -------
 
-			var horizontalDeltaX = -MathF.Sin(angleHorizontalMovement) * Constants.PLAYER_SPEED;
-			var horizontalDeltaY = MathF.Cos(angleHorizontalMovement) * Constants.PLAYER_SPEED;
+			var horizontalDeltaX = -MathF.Sin(angleHorizontalMovement) * GameConstants.PLAYER_SPEED;
+			var horizontalDeltaY = MathF.Cos(angleHorizontalMovement) * GameConstants.PLAYER_SPEED;
 
 			// start moving left/right
 			if (Raylib.IsKeyPressed(KeyboardKey.KEY_A))
@@ -142,8 +142,8 @@ namespace puzzle_game.Game.Systems
 
 			// ------ jump -------
 
-			var jumpDeltaX = -MathF.Sin(angleJumpMovement) * Constants.PLAYER_JUMP_SPEED;
-			var jumpDeltaY = MathF.Cos(angleJumpMovement) * Constants.PLAYER_JUMP_SPEED;
+			var jumpDeltaX = -MathF.Sin(angleJumpMovement) * GameConstants.PLAYER_JUMP_SPEED;
+			var jumpDeltaY = MathF.Cos(angleJumpMovement) * GameConstants.PLAYER_JUMP_SPEED;
 
 			var isVertical = Math.Abs(MathF.Sin(angle)) > 0.5;
 			var isOnSurface = isVertical ? vxNew == 0 : vyNew == 0;

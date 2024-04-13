@@ -12,8 +12,8 @@
 		public const float PLAYER_SPEED = 5;
         public const float PLAYER_JUMP_SPEED = PLAYER_SPEED * 3;
         public const float PLAYER_GRAVITY = 1;
-		public const float PLAYER_START_X = CENTER_X - 15;
-        public const float PLAYER_START_Y = CENTER_Y - 15;
+		public const float PLAYER_START_X = CENTER_X - 20;
+        public const float PLAYER_START_Y = CENTER_Y - 20;
 
 		public const float CAMERA_ROTATION_SPEED = 0.5f;
         public const float CAMERA_TARGET_X = CENTER_X;

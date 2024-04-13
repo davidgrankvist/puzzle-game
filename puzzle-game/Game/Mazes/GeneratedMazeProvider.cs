@@ -18,6 +18,7 @@ namespace puzzle_game.Game.Mazes
 
 		private static readonly int BLOCK_SIZE = 50;
 		private static readonly int WALL_SIZE = 5;
+		private static readonly int OVERLAPPING_BLOCK_OFFSET = BLOCK_SIZE - WALL_SIZE;
 
 		public GeneratedMazeProvider(IMazeGenerator mazeGenerator, int rows, int cols)
         {
@@ -48,11 +49,11 @@ namespace puzzle_game.Game.Mazes
 			 * and the blocked edges are thin walls between them.
 			 */
 			var mazeBlocks = new List<MazeBlock>();
-
 			var hasVisited = new HashSet<(int From, int To)>();
-			foreach (var edge in mazeGraph.GetAllEdges())
+
+			foreach (var edge in mazeGraph.GetAllEdges().Where(edge => edge.IsBlocked))
 			{
-				if (!edge.IsBlocked || hasVisited.Contains((edge.From, edge.To)))
+				if (hasVisited.Contains((edge.From, edge.To)))
 				{
 					continue;
 				}
@@ -68,17 +69,17 @@ namespace puzzle_game.Game.Mazes
 
 				MazeBlock block;
 
-				if (fromRow < toRow) // neighbor is above
+				if (fromRow > toRow) // neighbor is above
 				{
 					// wall from top left to top right
 					block = new MazeBlock(topLeft.X, topLeft.Y, BLOCK_SIZE, WALL_SIZE);
 
-				} else if (fromRow > toRow) // neighbor is below
+				} else if (fromRow < toRow) // neighbor is below
 				{
 					// wall from bottom left to bottom right
-					block = new MazeBlock(topLeft.X, topLeft.Y + BLOCK_SIZE, BLOCK_SIZE, WALL_SIZE);
+					block = new MazeBlock(topLeft.X, topLeft.Y + OVERLAPPING_BLOCK_OFFSET, BLOCK_SIZE, WALL_SIZE);
 				}
-				else if (fromCol > toRow) // neighbor is to the left
+				else if (fromCol > toCol) // neighbor is to the left
 				{
 					// wall from top left to bottom left
 					block = new MazeBlock(topLeft.X, topLeft.Y, WALL_SIZE, BLOCK_SIZE);
@@ -86,7 +87,7 @@ namespace puzzle_game.Game.Mazes
 				else if (fromCol < toCol) // neighbor is to the right
 				{
 					// wall from top right to bottom right
-					block = new MazeBlock(topLeft.X + BLOCK_SIZE, topLeft.Y + BLOCK_SIZE, WALL_SIZE, BLOCK_SIZE);
+					block = new MazeBlock(topLeft.X + OVERLAPPING_BLOCK_OFFSET, topLeft.Y, WALL_SIZE, BLOCK_SIZE);
 				}
 				else
 				{
@@ -101,11 +102,13 @@ namespace puzzle_game.Game.Mazes
 
 		private Vector2 ToPosition(int row, int col)
 		{
-			var offsetX = GameConstants.CENTER_X - Cols * BLOCK_SIZE / 2;
-			var offsetY = GameConstants.CENTER_Y - Rows * BLOCK_SIZE / 2;
+			var mazeWidth = Cols * BLOCK_SIZE;
+			var mazeHeight = Rows * BLOCK_SIZE;
+			var centralizeOffsetX = GameConstants.CENTER_X - mazeWidth / 2f;
+			var centralizeOffsetY = GameConstants.CENTER_Y - mazeHeight / 2f;
 
-			var x = offsetX + BLOCK_SIZE * row; 
-			var y = offsetY + BLOCK_SIZE * col;
+			var x = centralizeOffsetX + OVERLAPPING_BLOCK_OFFSET * col;
+			var y = centralizeOffsetY + OVERLAPPING_BLOCK_OFFSET * row;
 
 			return new Vector2(x, y);
 		}

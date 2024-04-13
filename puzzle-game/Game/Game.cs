@@ -17,7 +17,7 @@ namespace puzzle_game.Game
 		public Game()
 		{
 			entities = new List<Entity>();
-			var mazeProvider = new GeneratedMazeProvider(new RandomMazeGenerator(2652));
+			var mazeProvider = new GeneratedMazeProvider(new DfsMazeGenerator(6534));
 
 			systems = new List<ISystem>
 			{

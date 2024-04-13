@@ -37,6 +37,16 @@ namespace puzzle_game.Game.Mazes.MazeGeneration
 
 		public void InitializeEdges()
 		{
+			/*
+			 * Add edges to make a grid
+			 * 
+			 * Example 3x3:
+			 *		x - x - x
+			 *		|   |   |
+			 *		x - x - x
+			 *		|   |   |
+			 *		x - x - x
+			 */
             for (int i = 0; i < NumNodes; i++)
 			{
 				int row = ToRow(i);
